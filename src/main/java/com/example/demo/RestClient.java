@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,11 +18,12 @@ public class RestClient {
     static final String URL_USERS = "http://localhost:8080/api/users";
     static RestTemplate restTemplate = new RestTemplate();
     static HttpHeaders headers = new HttpHeaders();
+    static Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) throws URISyntaxException {
-          testGetUserListSuccess();
+//          testGetUserListSuccess();
 //        getRequestTest();
-//        postRequestTest();
+        postRequestTest();
 //        putRequestTest(16);
 //        deleteRequestTest(16);
     }
@@ -40,7 +44,7 @@ public class RestClient {
         HttpEntity<String> entity = new HttpEntity<String>(headers);// HttpEntity<String>: To get result as String.
         ResponseEntity<String> response = restTemplate.exchange(URL_USERS, HttpMethod.GET, entity, String.class);// Send request with GET method, and Headers.
         String result = response.getBody();
-        System.out.println(result);
+        logger.log(Level.INFO,result);
     }
 
     public static void postRequestTest() {
@@ -53,9 +57,9 @@ public class RestClient {
         // Send request with POST method.
         User e = restTemplate.postForObject(URL_USERS, requestBody, User.class);
         if (e != null) {
-            System.out.println("User created: " + e.getId());
+            logger.log(Level.INFO,"User created: " + e.getId());
         } else {
-            System.out.println("Something error!");
+            logger.log(Level.ERROR,"Something error!");
         }
     }
 
@@ -69,8 +73,8 @@ public class RestClient {
         // Send request with PUT method.
         restTemplate.put(URL_USERS_ID, requestBody, new Object[]{});
         User e = restTemplate.getForObject(URL_USERS_ID, User.class);
-        System.out.println("(Client side) Employee after update: ");
-        System.out.println("Employee: " + e.getName());
+        logger.log(Level.INFO,"(Client side) Employee after update: ");
+        logger.log(Level.INFO,"Employee: " + e.getName());
     }
 
     public static void deleteRequestTest(long id) {
