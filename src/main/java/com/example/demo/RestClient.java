@@ -44,7 +44,7 @@ public class RestClient {
         HttpEntity<String> entity = new HttpEntity<String>(headers);// HttpEntity<String>: To get result as String.
         ResponseEntity<String> response = restTemplate.exchange(URL_USERS, HttpMethod.GET, entity, String.class);// Send request with GET method, and Headers.
         String result = response.getBody();
-        logger.log(Level.INFO,result);
+        logger.log(Level.INFO,"All Users : "+result);
     }
 
     public static void postRequestTest() {
@@ -73,12 +73,17 @@ public class RestClient {
         // Send request with PUT method.
         restTemplate.put(URL_USERS_ID, requestBody, new Object[]{});
         User e = restTemplate.getForObject(URL_USERS_ID, User.class);
-        logger.log(Level.INFO,"(Client side) Employee after update: ");
-        logger.log(Level.INFO,"Employee: " + e.getName());
+        if(e!=null){
+            logger.log(Level.INFO,"(Client side) User after update: ");
+            logger.log(Level.INFO,"Employee: " + e.getName());
+        }else{
+            logger.log(Level.ERROR,"Something error!");
+        }
     }
 
     public static void deleteRequestTest(long id) {
         String URL_USERS_ID = "http://localhost:8080/api/users/" + id;
         restTemplate.delete(URL_USERS_ID);
+        logger.log(Level.INFO,"User Deleted"+id);
     }
 }
