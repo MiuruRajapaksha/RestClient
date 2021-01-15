@@ -21,11 +21,11 @@ public class RestClient {
     static Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) throws URISyntaxException {
-//          testGetUserListSuccess();
-        getRequestTest();
-//        postRequestTest();
-//        putRequestTest(16);
-//        deleteRequestTest(16);
+//          testGetUserListSuccess(); //to get all Users
+        getRequestTest();   //to get all Users
+//        postRequestTest(); //to create a test User
+//        putRequestTest(16); //to update an existing user
+//        deleteRequestTest(16); //to delete an existing user
     }
 
     @Test
