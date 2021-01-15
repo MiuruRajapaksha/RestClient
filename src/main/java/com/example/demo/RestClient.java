@@ -22,8 +22,8 @@ public class RestClient {
 
     public static void main(String[] args) throws URISyntaxException {
 //          testGetUserListSuccess();
-//        getRequestTest();
-        postRequestTest();
+        getRequestTest();
+//        postRequestTest();
 //        putRequestTest(16);
 //        deleteRequestTest(16);
     }
