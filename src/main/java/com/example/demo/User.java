@@ -22,6 +22,16 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", id=").append(id);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public long getId() {
         return id;
     }
